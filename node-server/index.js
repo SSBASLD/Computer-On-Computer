@@ -1,6 +1,5 @@
 
 const WebSocket = require("ws");
-console.log(WebSocket);
 
 const server = new WebSocket.Server({ port: '3000' });
 

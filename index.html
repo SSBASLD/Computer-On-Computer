@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html>
+
+<script>
+    let socket = new WebSocket('ws://localhost:3000');
+
+    
+      console.log("hi");
+      socket.onmessage = ({ data }) => {
+        console.log('Message from server ', data);
+      };
+
+    
+    function test() {
+        socket.send("hi");
+    }
+</script>
+
 <body>
-
-<h1>My First Heading</h1>
-
-<p>My first paragraph.</p>
-
+    <p>Welcome to WebSockets. Click here to start receiving messages.</p>
+    <button id="websocket-button" onclick = "test()">Click me</button>
+    <div id="websocket-returns"></div>
 </body>
-</html>
