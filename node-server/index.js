@@ -25,6 +25,9 @@ function originIsAllowed(origin) {
   return true;
 }
 
+let websiteAddress = '99.45.51.233';
+
+let keyInputs = [];
 wsServer.on('request', function(request) {
     if (!originIsAllowed(request.origin)) {
       // Make sure we only accept requests from an allowed origin
@@ -36,7 +39,10 @@ wsServer.on('request', function(request) {
     var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
-      console.log(connection)
+      if (connection.remoteAddress == websiteAddress) {
+        keyInputs.push(message);
+        console.log(keyInputs);
+      }
     });
     connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
