@@ -3,16 +3,9 @@
 <script>
     let socket = new WebSocket('wss://node-xkap.onrender.com/ws', 'echo-protocol');
 
-    
-      console.log("hi");
-      socket.onmessage = ({ data }) => {
-        console.log('Message from server ', data);
-      };
-
-    
-    function test() {
-        socket.send("hi");
-    }
+    document.addEventListener("keydown", (event) => {
+        socket.send(event.key);
+    });
 </script>
 
 <body>
