@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <script>
-    let socket = new WebSocket('wss://node-xkap.onrender.com/ws', 'echo-protocol');
+    let socket = new WebSocket('wss://node-xkap.onrender.com/ws', ['echo-protocol', 'website']);
 
     document.addEventListener("keydown", (event) => {
         socket.send(event.key);

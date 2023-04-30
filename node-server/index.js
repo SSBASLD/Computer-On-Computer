@@ -42,7 +42,7 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
       for (const connection of connections) {
-        console.log(connection.remoteAddress);
+        console.log(connection.protocol);
       }
 
       if (connection.remoteAddress == websiteAddress) {
