@@ -50,7 +50,7 @@ wsServer.on('request', function(request) {
   connection.on('message', function(message) {
     if (websiteRequest) {
       keyInputs.push(message);
-      controllerConnection.send(message);
+      controllerConnection.send(message.data);
     }
   });
   connection.on('close', function(reasonCode, description) {
