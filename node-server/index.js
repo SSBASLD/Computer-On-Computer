@@ -41,9 +41,7 @@ wsServer.on('request', function(request) {
     connections.push(connection);
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
-      for (const connection of connections) {
-        console.log(connection.protocol);
-      }
+      console.log(connection);
 
       if (connection.remoteAddress == websiteAddress) {
         keyInputs.push(message);
