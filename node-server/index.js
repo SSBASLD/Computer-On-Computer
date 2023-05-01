@@ -30,24 +30,24 @@ let websiteAddress = '99.45.51.233';
 let keyInputs = [];
 let connections = [];
 wsServer.on('request', function(request) {
-    if (!originIsAllowed(request.origin)) {
-      // Make sure we only accept requests from an allowed origin
-      request.reject();
-      console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
-      return;
-    }
-    
-    var connection = request.accept('echo-protocol', request.origin);
-    connections.push(connection);
-    console.log((new Date()) + ' Connection accepted.');
-    connection.on('message', function(message) {
-      console.log(connection);
+  console.log(request.headers);
 
-      if (connection.remoteAddress == websiteAddress) {
-        keyInputs.push(message);
+  if (!originIsAllowed(request.origin)) {
+      // Make sure we only accept requests from an allowed origin
+    request.reject();
+    console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
+    return;
+  }
+    
+  var connection = request.accept('echo-protocol', request.origin);
+  connections.push(connection);
+  console.log((new Date()) + ' Connection accepted.');
+  connection.on('message', function(message) {
+    if (connection.remoteAddress == websiteAddress) {
+      keyInputs.push(message);
       }
     });
-    connection.on('close', function(reasonCode, description) {
-        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
-    });
+  connection.on('close', function(reasonCode, description) {
+    console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+  });
 });
