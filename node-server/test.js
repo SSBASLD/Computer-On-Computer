@@ -1,6 +1,6 @@
 var W3CWebSocket = require('websocket').w3cwebsocket;
 
-var client = new W3CWebSocket('wss://node-xkap.onrender.com/ws', 'echo-protocol');
+var client = new W3CWebSocket('ws://localhost:8080', ['echo-protocol']);
 
 client.onerror = function() {
     console.log('Connection Error');

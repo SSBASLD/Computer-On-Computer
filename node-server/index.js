@@ -28,25 +28,31 @@ function originIsAllowed(origin) {
 let websiteAddress = '99.45.51.233';
 
 let keyInputs = [];
-let connections = [];
+let controllerConnection;
 wsServer.on('request', function(request) {
-  console.log(request.headers);
+  let websiteRequest = false;
+  if (request.requestedProtocols.includes("website")) websiteRequest = true;
+
+  let controllerRequest = false;
+  if (request.requestedProtocols.includes("controller")) controllerRequest = true;
 
   if (!originIsAllowed(request.origin)) {
-      // Make sure we only accept requests from an allowed origin
+    // Make sure we only accept requests from an allowed origin
     request.reject();
     console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
     return;
   }
     
   var connection = request.accept('echo-protocol', request.origin);
-  connections.push(connection);
+  if (controllerRequest) controllerConnection = connection;
+
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
-    if (connection.remoteAddress == websiteAddress) {
+    if (websiteRequest) {
       keyInputs.push(message);
-      }
-    });
+      connection.send(message);
+    }
+  });
   connection.on('close', function(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
   });
