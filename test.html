@@ -6,6 +6,13 @@
     document.addEventListener("keydown", (event) => {
         socket.send(event.key);
     });
+
+    document.addEventListener('mousemove', (event) => {
+        let jsonText = `{"x": ${event.clientX}, "y": ${event.clientY}}`
+        let jsonObject = JSON.parse(jsonText);
+
+        socket.send(jsonObject);
+    });
 </script>
 
 <body>
