@@ -4,14 +4,15 @@
     let socket = new WebSocket('wss://node-xkap.onrender.com/ws', ['echo-protocol', 'website']);
 
     document.addEventListener("keydown", (event) => {
-        socket.send(event.key);
+        let jsonText = `{"key": ${event.key}, "type": "KeyDown"}`
+
+        socket.send(jsonText);
     });
 
     document.addEventListener('mousemove', (event) => {
-        let jsonText = `{"x": ${event.clientX}, "y": ${event.clientY}}`
-        let jsonObject = JSON.parse(jsonText);
+        let jsonText = `{"x": ${event.clientX}, "y": ${event.clientY}, "type": "MouseMove"}`;
 
-        socket.send(jsonObject);
+        socket.send(jsonText);
     });
 </script>
 
