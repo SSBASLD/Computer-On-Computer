@@ -10,7 +10,11 @@
     });
 
     document.addEventListener('mousemove', (event) => {
-        let jsonText = `{"x": ${event.clientX}, "y": ${event.clientY}, "type": "MouseMove"}`;
+        let jsonText = `{"x": ${event.clientX}, 
+                        "y": ${event.clientY},
+                        "screenHeight": ${screen.availHeight},
+                        "screenWidth": ${screen.availWidth}, 
+                        "type": "MouseMove"}`;
 
         socket.send(jsonText);
     });
