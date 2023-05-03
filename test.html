@@ -4,7 +4,7 @@
     let socket = new WebSocket('wss://node-xkap.onrender.com/ws', ['echo-protocol', 'website']);
 
     document.addEventListener("keydown", (event) => {
-        let jsonText = `{"key": ${event.key}, "type": "KeyDown"}`
+        let jsonText = `{"key": ${event.key}, "type": "KeyDown"}`;
 
         socket.send(jsonText);
     });
