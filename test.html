@@ -20,7 +20,7 @@
     });
 
     document.onclick = (event) => {
-        let jsonText = `{"buttons": ${event.buttons}, "ctrlKey": ${ctrlKey}, "type": "MouseDown"}`;
+        let jsonText = `{"buttons": ${event.buttons}, "ctrlKey": ${event.ctrlKey}, "type": "MouseDown"}`;
 
         socket.send(jsonText);
     };
