@@ -18,6 +18,12 @@
 
         socket.send(jsonText);
     });
+
+    document.addEventListener('onmousedown', (event) => {
+        let jsonText = `{"buttons": ${event.buttons}, "type": "MouseDown"}`;
+
+        socket.send(jsonText);
+    });
 </script>
 
 <body>
