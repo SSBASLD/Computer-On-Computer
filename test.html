@@ -3,10 +3,42 @@
 <script>
     let socket = new WebSocket('wss://node-xkap.onrender.com/ws', ['echo-protocol', 'website']);
 
-    document.addEventListener("keydown", (event) => {
-        let jsonText = `{"key": "${event.key}", "type": "KeyDown"}`;
+    let previousKeys = [];
 
-        socket.send(jsonText);
+    let toggledKeys = [];
+    document.addEventListener("keydown", (event) => {
+        previousKeys.push(event.key);
+
+        let number;
+        previousKeys.forEach((element) => {
+            if (element == event.key) number++;
+        });
+
+        if (number > 5) {
+            if (!toggledKeys.includes(event.key)) {
+                toggledKeys.push(event.key);
+            }
+
+            let jsonText = `{"key": "${event.key}", "toggle": "down", "type": "KeyToggle"}`;
+            
+            socket.send(jsonText);
+        } else {
+            let jsonText = `{"key": "${event.key}", "type": "KeyDown"}`;
+
+            socket.send(jsonText);
+        }
+    });
+
+    document.addEventListener("keyup", (event) => {
+        previousKeys = previousKeys.splice(previousKeys.indexOf(event.key), 1);
+
+        if (toggledKeys.includes(event.key)) {
+            toggledKeys = toggledKeys.splice(toggledKeys.indexOf(event.key), 1);
+
+            let jsonText = `{"key": "${event.key}", "toggle": "up", "type": "KeyToggle"}`;
+            
+            socket.send(jsonText);
+        }
     });
 
     document.addEventListener('mousemove', (event) => {
