@@ -1,3 +1,5 @@
+console.log("main is working");
+ 
 import './style.css';
 
 import firebase from 'firebase/app';
