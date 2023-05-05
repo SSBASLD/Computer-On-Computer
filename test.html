@@ -9,10 +9,12 @@
     document.addEventListener("keydown", (event) => {
         previousKeys.push(event.key);
 
-        let number;
+        let number = 0;
         previousKeys.forEach((element) => {
             if (element == event.key) number++;
         });
+
+        console.log(number);
 
         if (number > 5) {
             if (!toggledKeys.includes(event.key)) {
