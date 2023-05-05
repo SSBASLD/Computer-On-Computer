@@ -5,21 +5,23 @@
 
     let previousKeys = [];
 
-    let toggledKeys = [];
+    let toggledKeys;
     document.addEventListener("keydown", (event) => {
-        previousKeys.push(event.key);
+        if (toggledKeys != event.key) {
+            previousKeys.push(event.key);
+        }
 
         let number = 0;
         previousKeys.forEach((element) => {
             if (element == event.key) number++;
         });
 
-        console.log(number);
-
         if (number > 5) {
-            if (!toggledKeys.includes(event.key)) {
-                toggledKeys.push(event.key);
+            if (toggledKeys != event.key) {
+                toggledKeys = event.key
             }
+
+            console.log(toggledKeys);
 
             let jsonText = `{"key": "${event.key}", "toggle": "down", "type": "KeyToggle"}`;
             
@@ -34,8 +36,9 @@
     document.addEventListener("keyup", (event) => {
         previousKeys = previousKeys.splice(previousKeys.indexOf(event.key), 1);
 
-        if (toggledKeys.includes(event.key)) {
-            toggledKeys = toggledKeys.splice(toggledKeys.indexOf(event.key), 1);
+        if (toggledKeys == event.key) {
+            toggledKeys = null;
+            previousKeys = previousKeys.filter(value => value != event.key);
 
             let jsonText = `{"key": "${event.key}", "toggle": "up", "type": "KeyToggle"}`;
             
