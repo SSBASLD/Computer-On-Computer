@@ -5,9 +5,9 @@
 
     let previousKeys = [];
 
-    let toggledKeys;
+    let toggledKey;
     document.addEventListener("keydown", (event) => {
-        if (toggledKeys != event.key) {
+        if (toggledKey != event.key) {
             previousKeys.push(event.key);
         }
 
@@ -17,8 +17,8 @@
         });
 
         if (number > 5) {
-            if (toggledKeys != event.key) {
-                toggledKeys = event.key
+            if (toggledKey != event.key) {
+                toggledKey = event.key
                 let jsonText = `{"key": "${event.key}", "toggle": "down", "type": "KeyToggle"}`;
                 
                 socket.send(jsonText);
@@ -33,12 +33,14 @@
     document.addEventListener("keyup", (event) => {
         previousKeys = previousKeys.splice(previousKeys.indexOf(event.key), 1);
 
-        if (toggledKeys == event.key) {
-            toggledKeys = null;
+        if (toggledKey == event.key) {
+            toggledKey = null;
             previousKeys = previousKeys.filter(value => value != event.key);
 
             let jsonText = `{"key": "${event.key}", "toggle": "up", "type": "KeyToggle"}`;
-            
+      
+            console.log(jsonText);
+
             socket.send(jsonText);
         }
     });
