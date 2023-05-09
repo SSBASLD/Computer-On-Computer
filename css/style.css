@@ -38,3 +38,17 @@ body {
   width: 20%;
   height: 10%;
 }
+
+.popup {
+  background-color: white;
+  border-width: thick;
+  border-style: solid;
+  border-color: black;
+
+  font-size: 150%;
+  text-align: left;
+  margin:  
+  top: 50%;
+  width: 50%;
+  height: 70%;
+}
