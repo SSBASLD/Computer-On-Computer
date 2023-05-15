@@ -1,5 +1,4 @@
-'use strict';
-
+console.log("test");
 var isInitiator;
 
 window.room = prompt("Enter room name:");
