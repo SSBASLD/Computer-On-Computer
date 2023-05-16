@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+
 <script>
     let socket = new WebSocket('wss://node-xkap.onrender.com/ws', ['echo-protocol', 'website']);
 
@@ -62,10 +64,4 @@
     };
 </script>
 
-<body>
-    <p>Welcome to WebSockets. Click here to start receiving messages.</p>
-    <button id="websocket-button" onclick = "test()">Click me</button>
-    <div id="websocket-returns"></div>
-</body>
-
-<iframe src="https://viewer.millicast.com?streamId=ryaxCh/teststream" allowfullscreen width="640" height="480" style="pointer-events: none"></iframe>
+<iframe src="https://viewer.millicast.com?streamId=ryaxCh/teststream" allowfullscreen style="pointer-events: none" class="videosize"></iframe>
