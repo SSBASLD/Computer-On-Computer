@@ -7,20 +7,58 @@
   <body>
     <h1 class="centered">Computer On Computer</h1>
 
-    <button class="button" style="left: 35%" id="Sign In Button">
+    <button
+      class="button"
+      style="left: 35%"
+      id="Sign In Button"
+      onclick="popUp(false)"
+    >
       Sign In
     </button>
 
-    <img src="resources/images/test.jpg" alt="red X" />
-
-    <button class="button" style="left: 65%" id="Create An Account Button">
+    <button
+      class="button"
+      style="left: 65%"
+      id="Create An Account Button"
+      onclick="popUp(true)"
+    >
       Create An Account
     </button>
 
-    <div id="PopUpDiv" class="centered popup">
-      Username:
-      <input />
+    <div id="SignInPopUpDiv" class="centered popup">
+      Username: <br />
+      <input class="textInput" /> <br />
+      <br />
+      <br />
+      Password: <br />
+      <input class="textInput" type="password" /> <br />
+      <button class="button popupButton" style="left: 35%">Sign In</button>
+      <button
+        class="button popupButton"
+        style="left: 65%"
+        onclick="popUp(false)"
+      >
+        Cancel
+      </button>
     </div>
+
+    <div id="NewAccountPopUpDiv" class="centered popup">
+      Username: <br />
+      <input class="textInput" /> <br />
+      <br />
+      <br />
+      Password: <br />
+      <input class="textInput" type="password" /> <br />
+      <button class="button popupButton" style="left: 35%">Create</button>
+      <button
+        class="button popupButton"
+        style="left: 65%"
+        onclick="popUp(true)"
+      >
+        Cancel
+      </button>
+    </div>
+
     <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html>

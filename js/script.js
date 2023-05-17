@@ -1,9 +1,12 @@
-document.getElementById('Sign In Button').onclick = popUp;
+document.getElementById('SignInPopUpDiv').style.display = 'none';
+document.getElementById('NewAccountPopUpDiv').style.display = 'none';
 
-document.getElementById('PopUpDiv').hidden = true;
+function popUp(newAccount) {
+  var x;
 
-function popUp() {
-  var x = document.getElementById('PopUpDiv');
+  if (!newAccount) x = document.getElementById('SignInPopUpDiv');
+  else x = document.getElementById('NewAccountPopUpDiv');
+
   if (x.style.display === 'none') {
     x.style.display = 'block';
   } else {
