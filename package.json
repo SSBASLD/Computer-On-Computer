@@ -1,0 +1,19 @@
+{
+  "name": "computer-on-computer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SSBASLD/Computer-On-Computer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SSBASLD/Computer-On-Computer/issues"
+  },
+  "homepage": "https://github.com/SSBASLD/Computer-On-Computer#readme"
+}
