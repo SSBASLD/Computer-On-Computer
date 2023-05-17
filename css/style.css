@@ -56,9 +56,15 @@ body {
 .videosize {
   position: absolute;
   z-index: -1;
-  top: 0;
-  left: 0;
-  width: 99%; 
+  width: 99%;
   height: 99%;
   object-fit: cover;
+
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%); /* Firefox */
+  -ms-transform: translate(-50%, -50%); /* IE 9 */
+  -webkit-transform: translate(-50%, -50%); /* Safari and Chrome*/
+  -o-transform: translate(-50%, -50%); /* Opera */
+  transform: translate(-50%, -50%);
 }
