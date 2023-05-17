@@ -13,3 +13,15 @@ function popUp(newAccount) {
     x.style.display = 'none';
   }
 }
+
+let socket = new WebSocket('wss://webrtc-test-6o5u.onrender.com/ws', [
+  'echo-protocol',
+]);
+
+function createAccount() {
+  let jsonDataString = `{
+    "test": "test"
+  }`;
+
+  socket.send(jsonDataString);
+}

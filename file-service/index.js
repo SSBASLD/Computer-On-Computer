@@ -1,4 +1,5 @@
 var WebSocketServer = require('websocket').server;
+var fs = require("fs/promises");
 var http = require('http');
 
 var server = http.createServer(function(request, response) {
@@ -6,8 +7,8 @@ var server = http.createServer(function(request, response) {
     response.writeHead(404);
     response.end();
 });
-server.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
+server.listen(9090, function() {
+    console.log((new Date()) + ' Server is listening on port 9090');
 });
 
 wsServer = new WebSocketServer({
@@ -25,14 +26,7 @@ function originIsAllowed(origin) {
   return true;
 }
 
-let keyInputs = [];
-let controllerConnection;
 wsServer.on('request', function(request) {
-  let websiteRequest = false;
-  if (request.requestedProtocols.includes("website")) websiteRequest = true;
-
-  let controllerRequest = false;
-  if (request.requestedProtocols.includes("controller")) controllerRequest = true;
 
   if (!originIsAllowed(request.origin)) {
     // Make sure we only accept requests from an allowed origin
@@ -42,14 +36,11 @@ wsServer.on('request', function(request) {
   }
     
   var connection = request.accept('echo-protocol', request.origin);
-  if (controllerRequest) controllerConnection = connection;
 
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
-    if (websiteRequest) {
-      keyInputs.push(message);
-      controllerConnection.send(message.utf8Data);
-    }
+    let jsonData = JSON.parse(message.utf8data);
+    console.log(jsonData);
   });
   connection.on('close', function(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
