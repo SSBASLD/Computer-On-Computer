@@ -1,5 +1,7 @@
 <?php
-echo move_uploaded_file(
+echo "HI";
+
+move_uploaded_file(
   $_FILES["upfile"]["tmp_name"], 
   "demo.txt"
-) ? "OK" : "ERROR UPLOADING";
+) ? "OK" : "ERROR UPLOADING"; 
