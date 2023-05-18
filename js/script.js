@@ -31,7 +31,7 @@ function createAccount() {
 
 function uploadFile() {
   // (A) CREATE BLOB OBJECT
-  var myBlob = new Blob(['CONTENT'], { type: 'text/plain' });
+  var myBlob = new Blob(['CONTENT CONTENT AND MORE CONTENT'], { type: 'text/plain' });
 
   // (B) FORM DATA
   var data = new FormData();
