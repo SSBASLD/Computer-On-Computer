@@ -40,8 +40,7 @@ wsServer.on('request', function(request) {
 
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
-    let jsonData = JSON.parse(message.utf8data);
-    console.log(jsonData);
+    console.log("message");
   });
   connection.on('close', function(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');

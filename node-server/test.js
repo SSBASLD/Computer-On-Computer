@@ -1,6 +1,6 @@
 var W3CWebSocket = require('websocket').w3cwebsocket;
 
-var client = new W3CWebSocket('ws://localhost:8080', ['echo-protocol']);
+var client = new W3CWebSocket('wss://webrtc-test-6o5u.onrender.com/ws', ['echo-protocol']);
 
 client.onerror = function() {
     console.log('Connection Error');

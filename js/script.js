@@ -14,9 +14,7 @@ function popUp(newAccount) {
   }
 }
 
-let socket = new WebSocket('wss://webrtc-test-6o5u.onrender.com/ws', [
-  'echo-protocol',
-]);
+let socket = new WebSocket('wss://webrtc-test-6o5u.onrender.com/ws', 'echo-protocol');
 
 function createAccount() {
   let jsonDataString = `{
