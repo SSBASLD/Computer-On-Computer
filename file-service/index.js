@@ -40,7 +40,7 @@ wsServer.on('request', function(request) {
 
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
-    console.log("message");
+    console.log(message.utf8Data);
   });
   connection.on('close', function(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
