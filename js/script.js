@@ -19,10 +19,18 @@ function popUp(newAccount) {
   }
 }
 
-function createAccount() {
-  let jsonDataString = `{
-    "test": "test"
-  }`;
+/** @param {Event} event */
+function createAccount(event) {
+  const url = new URL(form.action);
+  const formData = new FormData(form);
 
-  socket.send(jsonDataString);
+  /** @type {Parameters<fetch>[1]} */
+  const fetchOptions = {
+    method: form.method,
+    body: formData,
+  };
+
+  fetch(url, fetchOptions);
+
+  event.preventDefault();
 }
