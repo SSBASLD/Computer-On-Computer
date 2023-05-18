@@ -2,6 +2,11 @@ var WebSocketServer = require('websocket').server;
 var fs = require("fs/promises");
 var http = require('http');
 
+fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+});
+
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
     response.writeHead(404);
@@ -40,10 +45,7 @@ wsServer.on('request', function(request) {
 
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
-    fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
+    console.log("dum");
   });
   connection.on('close', function(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
