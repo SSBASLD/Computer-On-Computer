@@ -40,7 +40,10 @@ wsServer.on('request', function(request) {
 
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
-    console.log(message.utf8Data);
+    fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+    });
   });
   connection.on('close', function(reasonCode, description) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
