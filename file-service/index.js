@@ -3,8 +3,6 @@ var fs = require("fs");
 var http = require('http');
 
 fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
-    console.log(err);
-    if (err) throw err;
     console.log('Saved!');
 });
 
