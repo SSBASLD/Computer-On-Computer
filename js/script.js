@@ -1,8 +1,3 @@
-let socket = new WebSocket(
-  'wss://file-service-swwp.onrender.com/ws',
-  'echo-protocol'
-);
-
 document.getElementById('SignInPopUpDiv').style.display = 'none';
 document.getElementById('NewAccountPopUpDiv').style.display = 'none';
 
@@ -20,5 +15,30 @@ function popUp(newAccount) {
 }
 
 function createAccount() {
-  
+  let userDatas = localStorage.getItem('userDatas');
+
+  if (!userDatas) userDatas = {};
+  else userDatas = JSON.parse(userDatas);
+
+  let userData = {};
+  userData.password = document.getElementById('New Account Password').value;
+
+  userDatas[document.getElementById('New Account Username').value] = userData;
+
+  let jsonString = JSON.stringify(userDatas);
+  localStorage.setItem('userDatas', jsonString);
+}
+
+function uploadFile() {
+  // (A) CREATE BLOB OBJECT
+  var myBlob = new Blob(['CONTENT'], { type: 'text/plain' });
+
+  // (B) FORM DATA
+  var data = new FormData();
+  data.append('upfile', myBlob);
+
+  // (C) AJAX UPLOAD TO SERVER
+  fetch('upload.php', { method: 'POST', body: data })
+    .then((res) => res.text())
+    .then((txt) => console.log(txt));
 }

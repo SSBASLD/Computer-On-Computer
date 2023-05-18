@@ -25,7 +25,6 @@
       Create An Account
     </button>
 
-
     <div id="SignInPopUpDiv" class="centered popup">
       Username: <br />
       <input class="textInput" /> <br />
@@ -47,13 +46,20 @@
 
     <div id="NewAccountPopUpDiv" class="centered popup">
       Username: <br />
-      <input class="textInput" /> <br />
+      <input class="textInput" id="New Account Username" /> <br />
       <br />
       <br />
       Password: <br />
-      <input class="textInput" type="password" /> <br />
+      <input class="textInput" type="password" id="New Account Password" />
+      <br />
 
-      <button class="button popupButton" style="left: 35%" onclick="createAccount()">Create</button>
+      <button
+        class="button popupButton"
+        style="left: 35%"
+        onclick="createAccount()"
+      >
+        Create
+      </button>
 
       <button
         class="button popupButton"
@@ -65,5 +71,7 @@
     </div>
 
     <script type="text/javascript" src="js/script.js"></script>
+
+    <button onclick="uploadFile()">Upload File</button>
   </body>
 </html>
