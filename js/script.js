@@ -40,5 +40,5 @@ function uploadFile() {
   // (C) AJAX UPLOAD TO SERVER
   fetch('upload.php', { method: 'POST', body: data })
     .then((res) => res.text())
-    .then((txt) => console.log(txt));
+    .then((txt) => console.log("hi"));
 }
