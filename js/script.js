@@ -1,3 +1,8 @@
+let socket = new WebSocket(
+  'wss://file-service-swwp.onrender.com/ws',
+  'echo-protocol'
+);
+
 document.getElementById('SignInPopUpDiv').style.display = 'none';
 document.getElementById('NewAccountPopUpDiv').style.display = 'none';
 
@@ -13,8 +18,6 @@ function popUp(newAccount) {
     x.style.display = 'none';
   }
 }
-
-let socket = new WebSocket('wss://webrtc-test-6o5u.onrender.com/ws', 'echo-protocol');
 
 function createAccount() {
   let jsonDataString = `{
