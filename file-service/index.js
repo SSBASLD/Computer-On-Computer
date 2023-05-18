@@ -1,5 +1,5 @@
 var WebSocketServer = require('websocket').server;
-var fs = require("fs/promises");
+var fs = require("fs");
 var http = require('http');
 
 fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
