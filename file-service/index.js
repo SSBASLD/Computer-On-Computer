@@ -6,8 +6,6 @@ const port = 8000;
 
 let indexFile;
 
-console.log(indexFile);
-
 const requestListener = function (req, res) {
     res.setHeader("Content-Type", "text/html");
     res.writeHead(200);
@@ -19,6 +17,7 @@ const server = http.createServer(requestListener);
 fs.readFile(__dirname + "/index.html")
     .then(contents => {
         indexFile = contents;
+        console.log(contents);
         server.listen(port, host, () => {
             console.log(`Server is running on http://${host}:${port}`);
         });
