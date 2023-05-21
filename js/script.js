@@ -28,28 +28,3 @@ function createAccount() {
   let jsonString = JSON.stringify(userDatas);
   localStorage.setItem('userDatas', jsonString);
 }
-
-function uploadFile() {
-  // (A) CREATE BLOB OBJECT
-  var myBlob = new Blob([`<!DOCTYPE html>
-  <html>
-  <head>
-  <title>Page Title</title>
-  </head>
-  <body>
-  
-  <h1>This is a Heading</h1>
-  <p>This is a paragraph.</p>
-  
-  </body>
-  </html>`], { type: 'text/plain' });
-
-  // (B) FORM DATA
-  var data = new FormData();
-  data.append('upfile', myBlob);
-
-  // (C) AJAX UPLOAD TO SERVER
-  fetch('upload.php', { method: 'POST', body: data })
-    .then((res) => res.text())
-    .then((txt) => console.log("hi"));
-}
