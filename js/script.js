@@ -15,16 +15,25 @@ function popUp(newAccount) {
 }
 
 function createAccount() {
+  let password = document.getElementById('New Account Password').value;
+  let username = document.getElementById('New Account Username').value;
+
   let userDatas = localStorage.getItem('userDatas');
 
   if (!userDatas) userDatas = {};
   else userDatas = JSON.parse(userDatas);
 
   let userData = {};
-  userData.password = document.getElementById('New Account Password').value;
+  userData.password = password;
 
-  userDatas[document.getElementById('New Account Username').value] = userData;
+  userDatas[username] = userData;
 
   let jsonString = JSON.stringify(userDatas);
   localStorage.setItem('userDatas', jsonString);
+
+  signIn();
+}
+
+function signIn(username, password) {
+  localStorage.setItem('currentAccount', username);
 }
