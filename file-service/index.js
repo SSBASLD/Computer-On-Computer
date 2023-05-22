@@ -1,28 +1,34 @@
-const http = require("http");
-const fs = require('fs').promises;
-
-const host = 'localhost';
-const port = 8000;
+var WebSocketServer = require('websocket').server;
+var http = require('http');
+var fs = require('fs').promises;
 
 let indexFile;
 
-const requestListener = function (req, res) {
-    res.setHeader("Content-Type", "text/html");
-    res.writeHead(200);
-    res.end(indexFile);
-};
-
-const server = http.createServer(requestListener);
+var server = http.createServer(function(request, response) {
+    console.log((new Date()) + ' Received request for ' + request.url);
+    response.writeHead(200);
+    response.end(indexFile);
+});
 
 fs.readFile(__dirname + "/index.html")
     .then(contents => {
         indexFile = contents;
         console.log(contents);
-        server.listen(port, host, () => {
-            console.log(`Server is running on http://${host}:${port}`);
+        server.listen(8080, function() {
+          console.log((new Date()) + ' Server is listening on port 8080');
         });
     })
     .catch(err => {
         console.error(`Could not read index.html file: ${err}`);
         process.exit(1);
     });
+
+wsServer = new WebSocketServer({
+    httpServer: server,
+    // You should not use autoAcceptConnections for production
+    // applications, as it defeats all standard cross-origin protection
+    // facilities built into the protocol and the browser.  You should
+    // *always* verify the connection's origin and decide whether or not
+    // to accept it.
+    autoAcceptConnections: false
+});
