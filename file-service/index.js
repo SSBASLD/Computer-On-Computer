@@ -32,16 +32,17 @@ wsServer = new WebSocketServer({
     autoAcceptConnections: false
 });
 
-server.close();
-indexFile = `<!DOCTYPE html>
-<html>
-<body>
+server.close(() => {
+    indexFile = `<!DOCTYPE html>
+    <html>
+    <body>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+    <h1>My First Heading</h1>
+    <p>My first paragraph.</p>
 
-</body>
-</html>`;
-server.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
-  });
+    </body>
+    </html>`;
+    server.listen(8080, function() {
+        console.log((new Date()) + ' Server is listening on port 8080');
+      });
+});
