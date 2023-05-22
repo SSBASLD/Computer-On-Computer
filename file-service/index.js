@@ -13,7 +13,6 @@ var server = http.createServer(function(request, response) {
 fs.readFile(__dirname + "/index.html")
     .then(contents => {
         indexFile = contents;
-        console.log(contents);
         server.listen(8080, function() {
           console.log((new Date()) + ' Server is listening on port 8080');
         });
@@ -32,3 +31,16 @@ wsServer = new WebSocketServer({
     // to accept it.
     autoAcceptConnections: false
 });
+
+indexFile = `<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+
+</body>
+</html>`;
+server.listen(8080, function() {
+    console.log((new Date()) + ' Server is listening on port 8080');
+  });
