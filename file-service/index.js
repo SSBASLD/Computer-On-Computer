@@ -41,6 +41,3 @@ indexFile = `<!DOCTYPE html>
 
 </body>
 </html>`;
-server.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
-  });
