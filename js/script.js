@@ -36,4 +36,6 @@ function createAccount() {
 
 function signIn(username, password) {
   localStorage.setItem('currentAccount', username);
+
+  window.location.href = "https://test-service-ywt0.onrender.com";
 }
