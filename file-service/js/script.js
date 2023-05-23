@@ -1,3 +1,5 @@
+console.log("hi");
+
 let userData = JSON.parse(localStorage.getItem("userData"));
 
 let username = localStorage.getItem("currentAccount");
