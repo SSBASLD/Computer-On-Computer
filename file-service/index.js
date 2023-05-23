@@ -10,25 +10,18 @@ var server = http.createServer(function(request, response) {
     response.end(indexFile);
 });
 
-let userData = JSON.parse(localStorage.getItem('userData'));
-
-
-let username = localStorage.getItem(localStorage.getItem('currentAccount'));
-let password = userData[username];
-
-indexFile = `<!DOCTYPE html>
-<html>
-<body>
-
-<h1>${username}</h1>
-<p>${password}</p>
-
-</body>
-</html>
-`;
-server.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
-  });
+fs.readFile(__dirname + "/index.html")
+    .then(contents => {
+        indexFile = contents;
+        console.log(contents);
+        server.listen(8080, function() {
+          console.log((new Date()) + ' Server is listening on port 8080');
+        });
+    })
+    .catch(err => {
+        console.error(`Could not read index.html file: ${err}`);
+        process.exit(1);
+    });
 
 wsServer = new WebSocketServer({
     httpServer: server,
