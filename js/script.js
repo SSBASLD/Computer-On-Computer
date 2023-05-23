@@ -31,11 +31,11 @@ function createAccount() {
   let jsonString = JSON.stringify(userDatas);
   localStorage.setItem('userDatas', jsonString);
 
-  signIn();
+  signIn(username, password);
 }
 
-function signIn(username, password) {
-  localStorage.setItem('currentAccount', username);
+async function signIn(username, password) {
+  await localStorage.setItem('currentAccount', username);
 
-  window.location.href = "https://test-service-ywt0.onrender.com";
+  window.location.href = window.location.href + 'video-page/index.html';
 }
