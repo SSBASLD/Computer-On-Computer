@@ -25,7 +25,7 @@ function createAccount() {
   let userData = {};
   userData.password = password;
   userData.dolbyID = dolbyID;
-  userDate.dolbyStream = dolbyStream;
+  userData.dolbyStream = dolbyStream;
 
   userDatas[username] = userData;
 
