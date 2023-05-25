@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body class="accountPage">
+    Username: <br />
+    <input class="textInput" id="New Account Username" style="height: 8%" />
+    <br />
+    <br />
+    Password: <br />
+    <input
+      class="textInput"
+      type="password"
+      id="New Account Password"
+      style="height: 8%"
+    />
+    <br />
+    <br />
+    Dolby Account ID: <br />
+    <input class="textInput" id="Dolby Account ID" style="height: 8%" />
+    <br />
+    <br />
+    Dolby Stream Name: <br />
+    <input class="textInput" id="Dolby Stream Name" style="height: 8%" />
+    <br />
+    <br />
+
+    <button
+      class="button popupButton"
+      style="left: 35%; top: 90%"
+      onclick="createAccount()"
+    >
+      Create
+    </button>
+
+    <button
+      class="button popupButton"
+      style="left: 65%; top: 90%"
+      onclick="popUp(true)"
+    >
+      Cancel
+    </button>
+
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>
