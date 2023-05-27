@@ -19,7 +19,7 @@
       class="button"
       style="left: 65%"
       id="Create An Account Button"
-      onclick="popUp(true)"
+      onclick="toAccountPage()"
     >
       Create An Account
     </button>
@@ -38,32 +38,6 @@
         class="button popupButton"
         style="left: 65%"
         onclick="popUp(false)"
-      >
-        Cancel
-      </button>
-    </div>
-
-    <div id="NewAccountPopUpDiv" class="centered popup">
-      Username: <br />
-      <input class="textInput" id="New Account Username" /> <br />
-      <br />
-      <br />
-      Password: <br />
-      <input class="textInput" type="password" id="New Account Password" />
-      <br />
-
-      <button
-        class="button popupButton"
-        style="left: 35%"
-        onclick="createAccount()"
-      >
-        Create
-      </button>
-
-      <button
-        class="button popupButton"
-        style="left: 65%"
-        onclick="toHomePage()"
       >
         Cancel
       </button>

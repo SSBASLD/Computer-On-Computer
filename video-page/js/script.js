@@ -1,65 +1,77 @@
-let socket = new WebSocket('wss://node-xkap.onrender.com/ws', [
-  'echo-protocol',
-  'website',
-]);
+function startSocket() {
+  let socket = new WebSocket('wss://node-xkap.onrender.com/ws', [
+    'echo-protocol',
+    'website',
+  ]);
 
-let previousKeys = [];
+  socket.onopen = (event) => {
+    console.log('a');
 
-let toggledKey;
-document.addEventListener('keydown', (event) => {
-  if (toggledKey != event.key) {
-    previousKeys.push(event.key);
-  }
+    let previousKeys = [];
 
-  let number = 0;
-  previousKeys.forEach((element) => {
-    if (element == event.key) number++;
-  });
+    let toggledKey;
+    document.addEventListener('keydown', (event) => {
+      if (toggledKey != event.key) {
+        previousKeys.push(event.key);
+      }
 
-  if (number > 5) {
-    if (toggledKey != event.key) {
-      toggledKey = event.key;
-      let jsonText = `{"key": "${event.key}", "toggle": "down", "type": "KeyToggle"}`;
+      let number = 0;
+      previousKeys.forEach((element) => {
+        if (element == event.key) number++;
+      });
 
-      socket.send(jsonText);
-    }
-  } else {
-    let jsonText = `{"key": "${event.key}", "type": "KeyDown"}`;
+      if (number > 5) {
+        if (toggledKey != event.key) {
+          toggledKey = event.key;
+          let jsonText = `{"key": "${event.key}", "toggle": "down", "type": "KeyToggle"}`;
 
-    socket.send(jsonText);
-  }
-});
+          socket.send(jsonText);
+        }
+      } else {
+        let jsonText = `{"key": "${event.key}", "type": "KeyDown"}`;
 
-document.addEventListener('keyup', (event) => {
-  previousKeys = previousKeys.splice(previousKeys.indexOf(event.key), 1);
+        socket.send(jsonText);
+      }
+    });
 
-  if (toggledKey == event.key) {
-    toggledKey = null;
-    previousKeys = previousKeys.filter((value) => value != event.key);
+    document.addEventListener('keyup', (event) => {
+      previousKeys = previousKeys.splice(previousKeys.indexOf(event.key), 1);
 
-    let jsonText = `{"key": "${event.key}", "toggle": "up", "type": "KeyToggle"}`;
+      if (toggledKey == event.key) {
+        toggledKey = null;
+        previousKeys = previousKeys.filter((value) => value != event.key);
 
-    console.log(jsonText);
+        let jsonText = `{"key": "${event.key}", "toggle": "up", "type": "KeyToggle"}`;
 
-    socket.send(jsonText);
-  }
-});
+        socket.send(jsonText);
+      }
+    });
 
-document.addEventListener('mousemove', (event) => {
-  let jsonText = `{"x": ${event.clientX}, 
+    document.addEventListener('mousemove', (event) => {
+      let jsonText = `{"x": ${event.clientX}, 
                       "y": ${event.clientY},
                       "screenHeight": ${screen.availHeight},
                       "screenWidth": ${screen.availWidth}, 
                       "type": "MouseMove"}`;
 
-  socket.send(jsonText);
-});
+      socket.send(jsonText);
+    });
 
-document.onclick = (event) => {
-  let jsonText = `{"buttons": ${event.buttons}, "ctrlKey": ${event.ctrlKey}, "type": "MouseDown"}`;
+    document.onclick = (event) => {
+      let jsonText = `{"buttons": ${event.buttons}, "ctrlKey": ${event.ctrlKey}, "type": "MouseDown"}`;
 
-  socket.send(jsonText);
-};
+      socket.send(jsonText);
+    };
+  };
+}
+
+function connectToWebsocket() {
+  try {
+    startSocket();
+  } catch (e) {
+    alert(e);
+  }
+}
 
 let userData = JSON.parse(localStorage.getItem('userDatas'));
 

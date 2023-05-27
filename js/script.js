@@ -1,5 +1,4 @@
 document.getElementById('SignInPopUpDiv').style.display = 'none';
-document.getElementById('NewAccountPopUpDiv').style.display = 'none';
 
 function popUp(newAccount) {
   var x;
@@ -12,4 +11,10 @@ function popUp(newAccount) {
   } else {
     x.style.display = 'none';
   }
+}
+
+function toAccountPage() {
+  let editedString = window.location.href.replace(/index.html/, '');
+
+  window.location.href = editedString + 'new-account-page/index.html';
 }
