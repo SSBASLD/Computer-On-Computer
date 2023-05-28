@@ -26,6 +26,7 @@ function originIsAllowed(origin) {
 
 let keyInputs = [];
 let controllerConnection;
+let websiteConnection;
 wsServer.on('request', function(request) {
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) websiteRequest = true;
@@ -42,12 +43,17 @@ wsServer.on('request', function(request) {
     
   var connection = request.accept('echo-protocol', request.origin);
   if (controllerRequest) controllerConnection = connection;
+  else if (websiteRequest) websiteConnection = connection;
 
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
     if (websiteRequest) {
       keyInputs.push(message);
-      if (controllerConnection != null) controllerConnection.send(message.utf8Data);
+      if (controllerConnection != null) {
+        controllerConnection.send(message.utf8Data);
+      } else {
+        websiteConnection.send("Error: Controller Application Not Started");
+      }
     }
   });
   connection.on('close', function(reasonCode, description) {
