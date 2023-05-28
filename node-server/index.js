@@ -52,6 +52,7 @@ wsServer.on('request', function(request) {
       if (controllerConnection != null) {
         controllerConnection.send(message.utf8Data);
       } else {
+        console.log("a");
         websiteConnection.send("Error: Controller Application Not Started");
       }
     }
