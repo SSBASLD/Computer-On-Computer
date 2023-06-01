@@ -31,12 +31,21 @@ function originIsAllowed(origin) {
 let keyInputs = [];
 let controllerConnection;
 let websiteConnection;
+
+let websiteConnections = {};
+let controllerConnections = {};
+
 wsServer.on('request', function(request) {
   let websiteRequest = false;
-  if (request.requestedProtocols.includes("website")) websiteRequest = true;
+  if (request.requestedProtocols.includes("website")) {
+    websiteRequest = true;
+  }
 
   let controllerRequest = false;
-  if (request.requestedProtocols.includes("controller")) controllerRequest = true;
+  if (request.requestedProtocols.includes("controller")) {
+    controllerRequest = true;
+    console.log(request.requestedProtocols);
+  }
 
   if (!originIsAllowed(request.origin)) {
     // Make sure we only accept requests from an allowed origin
@@ -56,8 +65,7 @@ wsServer.on('request', function(request) {
       if (controllerConnection != null) {
         controllerConnection.send(message.utf8Data);
       } else {
-        console.log("a");
-        websiteConnection.send("Error: Controller Application Not Started");
+        websiteConnection.send("Controller Application Not Started");
       }
     }
   });
