@@ -21,7 +21,7 @@ wsServer = new WebSocketServer({
     // to accept it.
     autoAcceptConnections: false
 });
-W
+
 function originIsAllowed(origin) {
   // put logic here to detect whether the specified origin is allowed.
   return true;
