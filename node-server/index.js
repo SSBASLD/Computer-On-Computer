@@ -2,11 +2,10 @@ var WebSocketServer = require('websocket').server;
 var http = require('http');
 var fs = require('fs').promises;
 
-let indexFile;
-
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
     response.writeHead(200);
+    response.end();
 });
 
 server.listen(8080, function() {
@@ -22,7 +21,7 @@ wsServer = new WebSocketServer({
     // to accept it.
     autoAcceptConnections: false
 });
-
+W
 function originIsAllowed(origin) {
   // put logic here to detect whether the specified origin is allowed.
   return true;
