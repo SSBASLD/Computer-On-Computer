@@ -1,5 +1,5 @@
 function startSocket() {
-  let socket = new WebSocket('wss://node-xkap.onrender.com/ws', [
+  let socket = new WebSocket('wss://websocket-server-i98k.onrender.com/ws/', [
     'echo-protocol',
     'website',
   ]);
