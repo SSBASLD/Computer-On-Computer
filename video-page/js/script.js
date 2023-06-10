@@ -1,11 +1,13 @@
+let started = false;
 function startSocket() {
+  started = true;
   let socket = new WebSocket('wss://websocket-server-i98k.onrender.com/ws/', [
     'echo-protocol',
     'website',
   ]);
 
   socket.onopen = (event) => {
-    console.log('a');
+    alert('Connection Established');
 
     let previousKeys = [];
 
@@ -67,8 +69,10 @@ function startSocket() {
 
 function connectToWebsocket() {
   try {
-    startSocket();
+    if (!started) startSocket();
+    else alert('Already attempting to connect');
   } catch (e) {
+    started = false;
     alert(e);
   }
 }
