@@ -38,7 +38,6 @@ wsServer.on('request', function(request) {
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) {
     websiteRequest = true;
-    console.log(request.requestedProtocols);
   }
 
   let controllerRequest = false;
@@ -52,7 +51,9 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
     return;
   }
-    
+  
+  console.log(request.requestedProtocols);
+
   let uid = request.requestedProtocols[2];
   var connection = request.accept('echo-protocol', request.origin);
   if (controllerRequest) {
