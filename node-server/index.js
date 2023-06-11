@@ -64,6 +64,7 @@ wsServer.on('request', function(request) {
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
     if (websiteRequest) {
+      console.log(uid);
       keyInputs.push(message);
       if (controllerConnection != null) {
         controllerConnection.send(message.utf8Data);
