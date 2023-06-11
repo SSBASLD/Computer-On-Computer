@@ -38,12 +38,12 @@ wsServer.on('request', function(request) {
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) {
     websiteRequest = true;
+    console.log(request.requestedProtocols);
   }
 
   let controllerRequest = false;
   if (request.requestedProtocols.includes("controller")) {
     controllerRequest = true;
-    console.log(request.requestedProtocols);
   }
 
   if (!originIsAllowed(request.origin)) {
