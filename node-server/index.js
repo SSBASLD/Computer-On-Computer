@@ -52,7 +52,7 @@ wsServer.on('request', function(request) {
     return;
   }
   
-  console.log(request.requestedProtocols);
+  console.log(typeof request.requestedProtocols);
 
   let uid = request.requestedProtocols[2];
   var connection = request.accept('echo-protocol', request.origin);
