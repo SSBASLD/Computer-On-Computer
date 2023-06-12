@@ -59,9 +59,9 @@ wsServer.on('request', function(request) {
   let uid = request.requestedProtocols[2];
   var connection = request.accept('echo-protocol', request.origin);
   if (controllerRequest) {
-    controllerConnections[request.requestedProtocols[2]] = connection;
+    controllerConnections[uid] = connection;
   } else if (websiteRequest) {
-    websiteConnections[request.requestedProtocols[2]] = connection;
+    websiteConnections[uid] = connection;
   } 
 
   console.log((new Date()) + ' Connection accepted.');
