@@ -53,8 +53,6 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
     return;
   }
-  
-  request.requestedProtocols.forEach(element => console.log(element));
 
   let uid = request.requestedProtocols[2];
   var connection = request.accept('echo-protocol', request.origin);
@@ -67,12 +65,11 @@ wsServer.on('request', function(request) {
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
     if (websiteRequest) {
-      console.log(uid);
       keyInputs.push(message);
-      if (controllerConnection != null) {
-        controllerConnection.send(message.utf8Data);
+      if (controllerConnections[uid] != null) {
+        controllerConnections[uid].send(message.utf8Data);
       } else {
-        websiteConnection.send("Controller Application Not Started");
+        websiteConnections[uid].send("Controller Application Not Started");
       }
     }
   });
