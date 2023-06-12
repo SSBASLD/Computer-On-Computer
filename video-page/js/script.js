@@ -1,5 +1,5 @@
 let started = false;
-function startSocket() {
+function startSocket(uid) {
   started = true;
   let socket = new WebSocket('wss://websocket-server-i98k.onrender.com/ws/', [
     'echo-protocol',
@@ -67,23 +67,26 @@ function startSocket() {
   };
 }
 
-function connectToWebsocket() {
-  try {
-    if (!started) startSocket();
-    else alert('Already attempting to connect');
-  } catch (e) {
-    started = false;
-    alert(e);
-  }
-}
-
 let userData = JSON.parse(localStorage.getItem('userDatas'));
 
 let username = localStorage.getItem('currentAccount');
 let password = userData[username].password;
 let dolbyID = userData[username].dolbyID;
 let streamName = userData[username].dolbyStream;
+let uid = userData[username].uniqueID;
+
+alert(`Your unique ID is: ${uid}`);     
 
 document.getElementById(
   'Stream Element'
 ).src = `https://viewer.millicast.com?streamId=${dolbyID}/${streamName}`;
+
+function connectToWebsocket() {
+  try {
+    if (!started) startSocket(uid);
+    else alert('Already attempting to connect');
+  } catch (e) {
+    started = false;
+    alert(e);
+  }
+}

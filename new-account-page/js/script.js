@@ -1,3 +1,7 @@
+const uid = function () {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
+
 function toHomePage() {
   let editedString = window.location.href.replace(
     /new-account-page\/index.html/,
@@ -26,6 +30,7 @@ function createAccount() {
   userData.password = password;
   userData.dolbyID = dolbyID;
   userData.dolbyStream = dolbyStream;
+  userData.uniqueID = uid();
 
   userDatas[username] = userData;
 
