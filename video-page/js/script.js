@@ -1,10 +1,19 @@
 let started = false;
+let error = false;
 function startSocket(uid) {
   started = true;
   let socket = new WebSocket('wss://websocket-server-i98k.onrender.com/ws/', [
     'echo-protocol',
     'website',
+    uid,
   ]);
+
+  socket.onmessage = (message) => {
+    if (message.data.toLowerCase().includes('error:') && !error) {
+      alert(message.data);
+      error = true;
+    }
+  };
 
   socket.onopen = (event) => {
     alert('Connection Established');
@@ -75,7 +84,7 @@ let dolbyID = userData[username].dolbyID;
 let streamName = userData[username].dolbyStream;
 let uid = userData[username].uniqueID;
 
-alert(`Your unique ID is: ${uid}`);     
+alert(`Your unique ID is: ${uid}`);
 
 document.getElementById(
   'Stream Element'
