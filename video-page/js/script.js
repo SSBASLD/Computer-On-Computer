@@ -85,7 +85,13 @@ function startSocket(uid) {
 
 let userData = JSON.parse(localStorage.getItem('userDatas'));
 
-let username = localStorage.getItem('currentAccount');
+let username;
+if (pageAccessedByReload) {
+  username = sessionStorage.getItem('currentAccount');
+} else username = localStorage.getItem('currentAccount');
+
+sessionStorage.setItem('currentAccount', username);
+
 let password = userData[username].password;
 let dolbyID = userData[username].dolbyID;
 let streamName = userData[username].dolbyStream;
