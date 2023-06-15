@@ -1,3 +1,6 @@
+let streamWindow = document.getElementById('Stream Element');
+let connectButton = document.getElementById('Connect Button');
+
 const pageAccessedByReload =
   (window.performance.navigation && window.performance.navigation.type === 1) ||
   window.performance
@@ -91,6 +94,11 @@ if (pageAccessedByReload) {
 } else username = localStorage.getItem('currentAccount');
 
 sessionStorage.setItem('currentAccount', username);
+
+if (username == null) {
+  connectButton.style.display = 'none';
+  streamWindow.style.display = 'none';
+}
 
 let password = userData[username].password;
 let dolbyID = userData[username].dolbyID;
