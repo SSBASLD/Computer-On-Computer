@@ -26,13 +26,19 @@
 
     <div id="SignInPopUpDiv" class="centered popup">
       Username: <br />
-      <input class="textInput" /> <br />
+      <input class="textInput" id="Sign In Username" /> <br />
       <br />
       <br />
       Password: <br />
-      <input class="textInput" type="password" /> <br />
+      <input class="textInput" type="password" id="Sign In Password" /> <br />
 
-      <button class="button popupButton" style="left: 35%">Sign In</button>
+      <button
+        class="button popupButton"
+        style="left: 35%"
+        onclick="checkAccount()"
+      >
+        Sign In
+      </button>
 
       <button
         class="button popupButton"

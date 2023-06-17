@@ -18,3 +18,29 @@ function toAccountPage() {
 
   window.location.href = editedString + 'new-account-page/index.html';
 }
+
+function checkAccount() {
+  let username = document.getElementById('Sign In Username').textContent;
+  let password = document.getElementById('Sign In Password').textContent;
+
+  let userDatas = localStorage.getItem('userDatas');
+
+  if (!userDatas) userDatas = {};
+  else userDatas = JSON.parse(userDatas);
+
+  if (userDatas[username] == password) {
+    signIn(username, password);
+  } else {
+    alert('Incorrect Username or Password');
+  }
+}
+
+async function signIn(username, password) {
+  await localStorage.setItem('currentAccount', username);
+
+  let editedString = window.location.href.replace(
+    /new-account-page\/index.html/,
+    ''
+  );
+  window.location.href = editedString + 'video-page/index.html';
+}
