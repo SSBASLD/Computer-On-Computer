@@ -20,16 +20,18 @@ function toAccountPage() {
 }
 
 function checkAccount() {
-  let username = document.getElementById('Sign In Username').textContent;
-  let password = document.getElementById('Sign In Password').textContent;
+  let username = document.getElementById('Sign In Username').value;
+  let password = document.getElementById('Sign In Password').value;
 
   let userDatas = localStorage.getItem('userDatas');
 
   if (!userDatas) userDatas = {};
   else userDatas = JSON.parse(userDatas);
 
-  if (userDatas[username] == password) {
-    signIn(username, password);
+  if (userDatas[username] != null) {
+    if (userDatas[username].password == password) {
+      signIn(username, password);
+    }
   } else {
     alert('Incorrect Username or Password');
   }
