@@ -89,8 +89,9 @@ function startSocket(uid) {
 let userData = JSON.parse(localStorage.getItem('userDatas'));
 
 let username;
-if (pageAccessedByReload) {
+if (true) {
   username = sessionStorage.getItem('currentAccount');
+  console.log('Session Storage Used: ' + username);
 } else {
   username = localStorage.getItem('currentAccount');
   console.log('Local Storage Used: ' + username);
@@ -98,21 +99,21 @@ if (pageAccessedByReload) {
 
 sessionStorage.setItem('currentAccount', username);
 
-if (username == null) {
+if (username == 'null') {
   connectButton.style.display = 'none';
   streamWindow.style.display = 'none';
+} else {
+  let password = userData[username].password;
+  let dolbyID = userData[username].dolbyID;
+  let streamName = userData[username].dolbyStream;
+  let uid = userData[username].uniqueID;
+
+  alert(`Your unique ID is: ${uid}`);
+
+  document.getElementById(
+    'Stream Element'
+  ).src = `https://viewer.millicast.com?streamId=${dolbyID}/${streamName}`;
 }
-
-let password = userData[username].password;
-let dolbyID = userData[username].dolbyID;
-let streamName = userData[username].dolbyStream;
-let uid = userData[username].uniqueID;
-
-alert(`Your unique ID is: ${uid}`);
-
-document.getElementById(
-  'Stream Element'
-).src = `https://viewer.millicast.com?streamId=${dolbyID}/${streamName}`;
 
 function connectToWebsocket() {
   try {
