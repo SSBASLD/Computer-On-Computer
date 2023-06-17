@@ -1,5 +1,7 @@
 let streamWindow = document.getElementById('Stream Element');
 let connectButton = document.getElementById('Connect Button');
+let errorDiv = document.getElementById('Error Div');
+errorDiv.style.display = 'none';
 
 const pageAccessedByReload =
   (window.performance.navigation && window.performance.navigation.type === 1) ||
@@ -89,17 +91,14 @@ function startSocket(uid) {
 let userData = JSON.parse(localStorage.getItem('userDatas'));
 
 let username;
-if (true) {
-  username = sessionStorage.getItem('currentAccount');
-  console.log('Session Storage Used: ' + username);
-} else {
-  username = localStorage.getItem('currentAccount');
-  console.log('Local Storage Used: ' + username);
-}
+username = sessionStorage.getItem('currentAccount');
+console.log('Session Storage Used: ' + username);
 
 sessionStorage.setItem('currentAccount', username);
 
-if (username == 'null') {
+if (username == '' || username == undefined || username == 'null') {
+  errorDiv.style.display = 'block';
+
   connectButton.style.display = 'none';
   streamWindow.style.display = 'none';
 } else {
@@ -113,14 +112,14 @@ if (username == 'null') {
   document.getElementById(
     'Stream Element'
   ).src = `https://viewer.millicast.com?streamId=${dolbyID}/${streamName}`;
-}
 
-function connectToWebsocket() {
-  try {
-    if (!started) startSocket(uid);
-    else alert('Already attempting to connect');
-  } catch (e) {
-    started = false;
-    alert(e);
+  function connectToWebsocket() {
+    try {
+      if (!started) startSocket(uid);
+      else alert('Already attempting to connect');
+    } catch (e) {
+      started = false;
+      alert(e);
+    }
   }
 }

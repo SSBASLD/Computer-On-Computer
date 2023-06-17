@@ -38,7 +38,7 @@ function checkAccount() {
 }
 
 async function signIn(username, password) {
-  await localStorage.setItem('currentAccount', username);
+  await sessionStorage.setItem('currentAccount', username);
 
   let editedString = window.location.href.replace(
     /new-account-page\/index.html/,

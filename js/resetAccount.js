@@ -1,2 +1,2 @@
-localStorage.setItem('currentAccount', null);
+localStorage.setItem('currentAccount', '');
 console.log('reset');
