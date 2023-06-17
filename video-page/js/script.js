@@ -91,7 +91,10 @@ let userData = JSON.parse(localStorage.getItem('userDatas'));
 let username;
 if (pageAccessedByReload) {
   username = sessionStorage.getItem('currentAccount');
-} else username = localStorage.getItem('currentAccount');
+} else {
+  username = localStorage.getItem('currentAccount');
+  console.log('Local Storage Used: ' + username);
+}
 
 sessionStorage.setItem('currentAccount', username);
 
