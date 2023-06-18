@@ -46,5 +46,3 @@ async function signIn(username, password) {
   );
   window.location.href = editedString + 'video-page/index.html';
 }
-
-console.log(localStorage.getItem('currentAccount'));
