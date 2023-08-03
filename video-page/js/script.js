@@ -38,6 +38,8 @@ function startSocket(uid) {
         previousKeys.push(event.key);
       }
 
+      console.log(previousKeys);
+
       let number = 0;
       previousKeys.forEach((element) => {
         if (element == event.key) number++;
