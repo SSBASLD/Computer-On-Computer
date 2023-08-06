@@ -66,7 +66,7 @@ wsServer.on('request', function(request) {
   connection.on('message', function(message) {
     if (websiteRequest) {
       keyInputs.push(message);
-      if (controllerConnections[uid] != null) {
+      if (controllerConnections[uid] != null) {  
         controllerConnections[uid].send(message.utf8Data);
       } else {
         websiteConnections[uid].send("Error: Controller Application Not Started");

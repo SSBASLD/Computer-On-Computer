@@ -53,9 +53,11 @@ function startSocket(uid) {
           socket.send(jsonText);
         }
       } else {
-        let jsonText = `{"key": "${event.key}", "type": "KeyDown"}`;
+        previousKeys.forEach((element) => {
+          let jsonText = `{"key": "${element}", "type": "KeyDown"}`;
 
-        socket.send(jsonText);
+          socket.send(jsonText);
+        });
       }
     });
 
