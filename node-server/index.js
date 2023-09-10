@@ -14,6 +14,14 @@ server.listen(8080, function() {
   console.log((new Date()) + ' Server is listening on port 8080');
 });
 
+const heartbeat = (ws) => {
+  ws.isAlive = true
+}
+
+const ping = (ws) => {
+  // do some stuff
+}
+
 wsServer = new WebSocketServer({
     httpServer: server,
     // You should not use autoAcceptConnections for production
@@ -35,6 +43,10 @@ let websiteConnection;
 
 let websiteConnections = {};
 let controllerConnections = {};
+
+wsServer.on("connection", function(test) {
+  console.log("works");
+});
 
 wsServer.on('request', function(request) {
   let websiteRequest = false;
