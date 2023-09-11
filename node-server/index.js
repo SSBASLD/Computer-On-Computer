@@ -87,8 +87,10 @@ wsServer.on('request', function(request) {
   });
 });
 
+
+console.log(wsServer);
+
 const interval = setInterval(() => {
-  console.log(wsServer);
 
   wsServer.clients.forEach((ws) => {
      if (ws.isAlive === false) {
