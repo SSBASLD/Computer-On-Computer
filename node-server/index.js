@@ -45,6 +45,7 @@ let controllerConnections = {};
 wsServer.on('request', function(request) {
   request.socket.isAlive = true;
   request.socket.on('pong', () => { heartbeat(socket) });
+  console.log(request.socket);
 
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) {
