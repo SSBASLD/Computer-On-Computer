@@ -1,5 +1,3 @@
-console.log("a");
-
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 var fs = require('fs').promises;
@@ -44,11 +42,10 @@ let websiteConnection;
 let websiteConnections = {};
 let controllerConnections = {};
 
-wsServer.on("connection", function(test) {
-  console.log("works");
-});
-
 wsServer.on('request', function(request) {
+  request.socket.isAlive = true;
+  request.socket.on('pong', () => { heartbeat(socket) });
+
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) {
     websiteRequest = true;
