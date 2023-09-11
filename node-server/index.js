@@ -45,7 +45,6 @@ let controllerConnections = {};
 wsServer.on('request', function(request) {
   request.socket.isAlive = true;
   request.socket.on('pong', () => { heartbeat(socket) });
-  console.log(request.socket);
 
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) {
@@ -87,3 +86,14 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
   });
 });
+
+const interval = setInterval(() => {
+  wsServer.clients.forEach((ws) => {
+     if (ws.isAlive === false) {
+          return ws.terminate()
+      }
+
+      ws.isAlive = false
+      ws.ping(() => { ping(ws) })
+  })
+}, 30000)
