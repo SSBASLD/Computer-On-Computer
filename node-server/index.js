@@ -94,13 +94,13 @@ wsServer.on('request', function(request) {
 
 const interval = setInterval(() => {
   connections.forEach((ws) => {
-     if (ws.isAlive === false) {
-          return ws.terminate()
-      }
+    if (ws.isAlive === false) {
+      return ws.terminate()
+    }
 
-      console.log(ws);
+    console.log(ws);
 
-      ws.isAlive = false
-      ws.ping(() => { ping(ws) })
+    ws.isAlive = false
+    ws.ping(() => { ping(ws) })
   })
 }, 30000)
