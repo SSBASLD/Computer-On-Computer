@@ -42,10 +42,9 @@ let websiteConnection;
 let websiteConnections = {};
 let controllerConnections = {};
 
-wsServer.on('request', function(request) {
-  request.socket.isAlive = true;
-  request.socket.on('pong', () => { heartbeat(socket) });
+let connections = [];
 
+wsServer.on('request', function(request) {
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) {
     websiteRequest = true;
@@ -65,6 +64,12 @@ wsServer.on('request', function(request) {
 
   let uid = request.requestedProtocols[2];
   var connection = request.accept('echo-protocol', request.origin);
+
+  request.socket.isAlive = true;
+  request.socket.on('pong', () => { heartbeat(socket) });
+
+  connections.push(request.socket);
+
   if (controllerRequest) {
     controllerConnections[uid] = connection;
   } else if (websiteRequest) {
@@ -87,13 +92,8 @@ wsServer.on('request', function(request) {
   });
 });
 
-
-console.log(wsServer);
-
 const interval = setInterval(() => {
-  console.log(wsServer.connections);
-
-  wsServer.clients.forEach((ws) => {
+  connections.forEach((ws) => {
      if (ws.isAlive === false) {
           return ws.terminate()
       }
