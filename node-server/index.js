@@ -98,6 +98,8 @@ const interval = setInterval(() => {
           return ws.terminate()
       }
 
+      console.log(ws);
+
       ws.isAlive = false
       ws.ping(() => { ping(ws) })
   })
