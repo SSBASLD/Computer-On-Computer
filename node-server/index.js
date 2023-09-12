@@ -45,7 +45,7 @@ let controllerConnections = {};
 let connections = [];
 
 wsServer.on('request', function(request) {
-  console.log(request.websocket);
+  console.log(request);
 
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) {
