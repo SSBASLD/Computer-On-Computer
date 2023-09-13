@@ -45,7 +45,6 @@ let controllerConnections = {};
 let connections = [];
 
 wsServer.on('request', function(request) {
-
   let websiteRequest = false;
   if (request.requestedProtocols.includes("website")) {
     websiteRequest = true;
@@ -69,7 +68,9 @@ wsServer.on('request', function(request) {
   request.socket.isAlive = true;
   request.socket.on('pong', () => { heartbeat(socket) });
 
-  connections.push(request.client);
+  console.log(connection);
+
+  connections.push(request.socket);
 
   if (controllerRequest) {
     controllerConnections[uid] = connection;
