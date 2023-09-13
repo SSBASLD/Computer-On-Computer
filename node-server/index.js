@@ -12,14 +12,6 @@ server.listen(8080, function() {
   console.log((new Date()) + ' Server is listening on port 8080');
 });
 
-const heartbeat = (ws) => {
-  ws.isAlive = true
-}
-
-const ping = (ws) => {
-  // do some stuff
-}
-
 wsServer = new WebSocketServer({
     httpServer: server,
     // You should not use autoAcceptConnections for production
@@ -66,11 +58,19 @@ wsServer.on('request', function(request) {
   var connection = request.accept('echo-protocol', request.origin);
 
   request.socket.isAlive = true;
-  request.socket.on('pong', () => { heartbeat(socket) });
 
-  console.log(connection);
+  connections.push(connections);
 
-  connections.push(request.socket);
+  const interval = setInterval(() => {
+    connections.forEach((connection) => {
+      if (connection.isAlive === false) {
+        return connection.end();
+      }
+  
+      connection.isAlive = false
+      connection.send("ping");
+    })
+  }, 30000)
 
   if (controllerRequest) {
     controllerConnections[uid] = connection;
@@ -80,6 +80,18 @@ wsServer.on('request', function(request) {
 
   console.log((new Date()) + ' Connection accepted.');
   connection.on('message', function(message) {
+    if (message.utf8Data.includes("pong")) {
+      let connectionUID = message.utf8Data.substring(5);
+
+      if (websiteRequest) {
+        websiteConnections[connectionUID].isAlive = true;
+      } else {
+        controllerConnections[uid].isAlive = true;
+      }
+
+      return;
+    } 
+
     if (websiteRequest) {
       keyInputs.push(message);
       if (controllerConnections[uid] != null) {  
@@ -93,16 +105,3 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
   });
 });
-
-const interval = setInterval(() => {
-  connections.forEach((ws) => {
-    if (ws.isAlive === false) {
-      return ws.terminate()
-    }
-
-    console.log(ws);
-
-    ws.isAlive = false
-    ws.ping(() => { ping(ws) })
-  })
-}, 30000)
