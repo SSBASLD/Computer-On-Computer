@@ -59,7 +59,7 @@ wsServer.on('request', function(request) {
 
   request.socket.isAlive = true;
 
-  connections.push(connections);
+  connections.push(connection);
 
   const interval = setInterval(() => {
     connections.forEach((connection) => {
