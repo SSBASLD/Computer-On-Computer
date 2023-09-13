@@ -64,7 +64,7 @@ wsServer.on('request', function(request) {
   const interval = setInterval(() => {
     connections.forEach((connection) => {
       if (connection.isAlive === false) {
-        return connection.end();
+        return connection.terminate();
       }
   
       connection.isAlive = false
