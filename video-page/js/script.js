@@ -10,7 +10,7 @@ const pageAccessedByReload =
     .map((nav) => nav.type)
     .includes('reload');
 
-let uid;
+let uid;  
 
 let started = false;
 let error = false;
@@ -34,6 +34,7 @@ function startSocket(uid) {
     }
   };
 
+  let mousePos = {"x": 0, "y": 0};
   socket.onopen = (event) => {
     alert('Connection Established');
 
@@ -79,14 +80,25 @@ function startSocket(uid) {
       }
     });
 
-    document.addEventListener('mousemove', (event) => {
-      let jsonText = `{"x": ${event.clientX}, 
-                      "y": ${event.clientY},
-                      "screenHeight": ${screen.availHeight},
-                      "screenWidth": ${screen.availWidth}, 
-                      "type": "MouseMove"}`;
+    let oldMousePos = {"x": 0, "y": 0}
+    const interval = setInterval(() => {
+      if (mousePos.x != oldMousePos.x || mousePos.y != oldMousePos.y) {
+        oldMousePos.x = mousePos.x;
+        oldMousePos.y = mousePos.y;
 
-      socket.send(jsonText);
+        let jsonText = `{"x": ${mousePos.x}, 
+          "y": ${mousePos.y},
+          "screenHeight": ${screen.availHeight},
+          "screenWidth": ${screen.availWidth}, 
+          "type": "MouseMove"}`;
+
+        socket.send(jsonText);
+      }
+    }, 500)
+
+    document.addEventListener('mousemove', (event) => {
+      mousePos.x = event.clientX;
+      mousePos.y = event.clientY;
     });
 
     document.onclick = (event) => {
