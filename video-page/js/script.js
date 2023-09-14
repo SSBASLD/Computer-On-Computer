@@ -10,6 +10,8 @@ const pageAccessedByReload =
     .map((nav) => nav.type)
     .includes('reload');
 
+let uid;
+
 let started = false;
 let error = false;
 function startSocket(uid) {
@@ -21,7 +23,7 @@ function startSocket(uid) {
   ]);
 
   socket.onmessage = (message) => {
-    if (e.data == "ping") {
+    if (message.data == "ping") {
       client.send("pong" + " " + uid);
       return;
     }
@@ -112,7 +114,7 @@ if (username == '' || username == undefined || username == 'null') {
   let password = userData[username].password;
   let dolbyID = userData[username].dolbyID;
   let streamName = userData[username].dolbyStream;
-  let uid = userData[username].uniqueID;
+  uid = userData[username].uniqueID;
 
   alert(`Your unique ID is: ${uid}`);
 
