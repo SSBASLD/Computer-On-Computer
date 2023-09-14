@@ -94,7 +94,7 @@ function startSocket(uid) {
 
         socket.send(jsonText);
       }
-    }, 500)
+    }, 100)
 
     document.addEventListener('mousemove', (event) => {
       mousePos.x = event.clientX;
