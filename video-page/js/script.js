@@ -21,6 +21,11 @@ function startSocket(uid) {
   ]);
 
   socket.onmessage = (message) => {
+    if (e.data == "ping") {
+      client.send("pong" + " " + uid);
+      return;
+    }
+
     if (message.data.toLowerCase().includes('error:') && !error) {
       alert(message.data);
       error = true;
