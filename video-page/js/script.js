@@ -10,7 +10,7 @@ const pageAccessedByReload =
     .map((nav) => nav.type)
     .includes('reload');
 
-let uid;  
+let uid;
 
 let started = false;
 let error = false;
@@ -23,8 +23,8 @@ function startSocket(uid) {
   ]);
 
   socket.onmessage = (message) => {
-    if (message.data == "ping") {
-      client.send("pong" + " " + uid);
+    if (message.data == 'ping') {
+      socket.send('pong' + ' ' + uid);
       return;
     }
 
@@ -34,7 +34,7 @@ function startSocket(uid) {
     }
   };
 
-  let mousePos = {"x": 0, "y": 0};
+  let mousePos = { x: 0, y: 0 };
   socket.onopen = (event) => {
     alert('Connection Established');
 
@@ -80,7 +80,7 @@ function startSocket(uid) {
       }
     });
 
-    let oldMousePos = {"x": 0, "y": 0}
+    let oldMousePos = { x: 0, y: 0 };
     const interval = setInterval(() => {
       if (mousePos.x != oldMousePos.x || mousePos.y != oldMousePos.y) {
         oldMousePos.x = mousePos.x;
@@ -94,7 +94,7 @@ function startSocket(uid) {
 
         socket.send(jsonText);
       }
-    }, 10)
+    }, 10);
 
     document.addEventListener('mousemove', (event) => {
       mousePos.x = event.clientX;
