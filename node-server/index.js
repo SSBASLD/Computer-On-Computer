@@ -70,7 +70,7 @@ wsServer.on('request', function(request) {
       connection.isAlive = false
       connection.send("ping");
     })
-  }, 30000)
+  }, 100000)
 
   if (controllerRequest) {
     controllerConnections[uid] = connection;
