@@ -45,12 +45,12 @@ function startSocket(uid) {
       if (previousKeys.length != 0) {
         let arrayLiteral = '[';
         for (let [index, key] of previousKeys.entries()) {
-          arrayLiteral += `${key}`;
+          arrayLiteral += `"${key}"`;
           if (index != previousKeys.length - 1) arrayLiteral += ',';
         }
         arrayLiteral += ']';
 
-        let jsonText = `{"key": [${previousKeys}], "toggle": "down", "type": "KeyDown"}`;
+        let jsonText = `{"key": ${arrayLiteral}, "toggle": "down", "type": "KeyDown"}`;
         socket.send(jsonText);
       }
 
