@@ -41,47 +41,21 @@ function startSocket(uid) {
     let previousKeys = [];
 
     let toggledKey;
+    const keyInterval = setInterval(() => {
+      if (previousKeys.length != 0) {
+        let jsonText = `{"key": ${previousKeys}, "toggle": "down", "type": "KeyDown"}`;
+        socket.send(jsonText);
+      }
+
+      previousKeys = [];
+    }, 10);
+
     document.addEventListener('keydown', (event) => {
-      if (toggledKey != event.key) {
-        previousKeys.push(event.key);
-      }
-
-      console.log(previousKeys);
-
-      let number = 0;
-      previousKeys.forEach((element) => {
-        if (element == event.key) number++;
-      });
-
-      if (number > 5) {
-        if (toggledKey != event.key) {
-          toggledKey = event.key;
-          let jsonText = `{"key": "${event.key}", "toggle": "down", "type": "KeyToggle"}`;
-
-          socket.send(jsonText);
-        }
-      } else {
-        let jsonText = `{"key": "${event.key}", "type": "KeyDown"}`;
-
-        socket.send(jsonText);
-      }
-    });
-
-    document.addEventListener('keyup', (event) => {
-      previousKeys = previousKeys.splice(previousKeys.indexOf(event.key), 1);
-
-      if (toggledKey == event.key) {
-        toggledKey = null;
-        previousKeys = previousKeys.filter((value) => value != event.key);
-
-        let jsonText = `{"key": "${event.key}", "toggle": "up", "type": "KeyToggle"}`;
-
-        socket.send(jsonText);
-      }
+      previousKeys.push(event.key);
     });
 
     let oldMousePos = { x: 0, y: 0 };
-    const interval = setInterval(() => {
+    const mouseInterval = setInterval(() => {
       if (mousePos.x != oldMousePos.x || mousePos.y != oldMousePos.y) {
         oldMousePos.x = mousePos.x;
         oldMousePos.y = mousePos.y;
