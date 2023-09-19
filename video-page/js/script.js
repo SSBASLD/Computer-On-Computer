@@ -43,6 +43,13 @@ function startSocket(uid) {
     let toggledKey;
     const keyInterval = setInterval(() => {
       if (previousKeys.length != 0) {
+        let arrayLiteral = '[';
+        for (let [index, key] of previousKeys.entries()) {
+          arrayLiteral += `${key}`;
+          if (index != previousKeys.length - 1) arrayLiteral += ',';
+        }
+        arrayLiteral += ']';
+
         let jsonText = `{"key": [${previousKeys}], "toggle": "down", "type": "KeyDown"}`;
         socket.send(jsonText);
       }
