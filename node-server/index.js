@@ -63,6 +63,17 @@ wsServer.on('request', function (request) {
 
   connections.push(connection);
 
+  const interval = setInterval(() => {
+    connections.forEach((connection) => {
+      if (connection.isAlive === false) {
+        return connection.socket.end();
+      }
+
+      connection.isAlive = false;
+      connection.send('ping');
+    });
+  }, 100000);
+
   if (controllerRequest) {
     controllerConnections[uid] = connection;
   } else if (websiteRequest) {
